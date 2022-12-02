@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 [Advent of Code 2022](https://adventofcode.com/2022/)
 =====================================================
 I use this to [learn](https://doc.rust-lang.org/book/title-page.html) [Rust](https://www.rust-lang.org/).
@@ -32,3 +34,7 @@ fn read_input(file_path: &str) -> Vec<String> {
 The only way I found to abstract away the basic reading of the input files is to copy the lines into a new vector
 creating new `String`s from the `Slice`s the `split` method creates since the slices reference data in the local variable
 `contents` that will be out of scope by the end of the function.
+
+# License
+
+See [here](LICENSE)
