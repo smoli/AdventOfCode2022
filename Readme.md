@@ -7,6 +7,8 @@ I use this to [learn](https://doc.rust-lang.org/book/title-page.html) [Rust](htt
 I'll see how far I get in terms of the puzzles themselves. I'll try to write some key learnings/struggles 
 for each day hoping that once I progressed a bit I'll look at the first days and think: "Well, of course! Noob!"
 
+Since I use this as a learning experience, solutions might be over-engineered 😁
+
 # Day 1
 
 Getting used to the basic syntax and the basics of tooling
