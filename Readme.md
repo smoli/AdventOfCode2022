@@ -37,6 +37,10 @@ The only way I found to abstract away the basic reading of the input files is to
 creating new `String`s from the `Slice`s the `split` method creates since the slices reference data in the local variable
 `contents` that will be out of scope by the end of the function.
 
+# Day 3
+
+Made a local crate. Works great, but no code completion in the IDE. 
+
 # License
 
 See [here](LICENSE)
