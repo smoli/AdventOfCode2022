@@ -45,7 +45,8 @@ Made a local crate. Works great, but no code completion in the IDE.
 
 I have the feeling I still do too much work for extracting data from strings :-(
 
-I use this to split a string like `12-24,54-67` into its four parts. Will look at regular expression in Rust.
+I use this to split a string like `12-24,54-67` into its four parts. Will look 
+at regular expressions in Rust.
 
 ```rust
 
@@ -72,7 +73,7 @@ fn get_ranges(inp: &String) -> Vec<Range> {
 }
 
 ```
-)
+
 
 # License
 
