@@ -134,7 +134,7 @@ fn read_input(file_path: &str) -> Vec<String> {
 
 
 fn main() {
-    let data = read_input("input.txt");
+    let data = read_input("sampleInput.txt");
 
     let mut sum_1: i32 = 0;
     let mut sum_2: i32 = 0;

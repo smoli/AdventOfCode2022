@@ -26,7 +26,7 @@ fn map_char(c: char) -> u32 {
 
 
 fn main() {
-    let data: Vec<String> = commons::read_input("input.txt");
+    let data: Vec<String> = commons::read_input("sampleInput.txt");
 
 
     let mut sum = 0;
