@@ -80,6 +80,47 @@ fn get_ranges(inp: &String) -> Vec<Range> {
 * Side-By-Side-Testing is quite seamless
 
 
+# Day 5
+
+Parsing the input was messy.
+
+I had lots of trouble with borrowing and stuff.
+
+I use a `Vec<Vec<char>>` to represent the stack. When I parse the input file top to bottom,
+the stacks will be in reverse order when simply pushing into them. I fixed that 
+with `insert(0, crate)`. But at first I wanted to simply reverse all the stack-vectors. 
+
+```rust
+    fn main() {
+    
+        /* ... */
+    
+        for mut stack in stacks {
+            stack.reverse()
+        }
+
+        state[0].pop();     // Cannot mutate as the implicit call to into_iter() in the loop
+    }
+```
+
+So I tried to use a slice
+
+```rust
+
+    fn main() {
+    
+        /* ... */
+    
+        for mut stack in stacks[0..] {
+            stack.reverse() // `stack` is a `&` reference, so the data it refers to cannot be borrowed as mutable
+        }
+
+        state[0].pop(); 
+    }
+```
+
+🤷‍♂️
+
 # License
 
 See [here](LICENSE)
