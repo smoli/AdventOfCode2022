@@ -72,8 +72,12 @@ fn get_ranges(inp: &String) -> Vec<Range> {
 
     result
 }
-
 ```
+
+# What I like so far
+
+* Error-Messages and documentation are both really helpful!
+* Side-By-Side-Testing is quite seamless
 
 
 # License
