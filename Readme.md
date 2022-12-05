@@ -99,7 +99,7 @@ with `insert(0, crate)`. But at first I wanted to simply reverse all the stack-v
             stack.reverse()
         }
 
-        state[0].pop();     // Cannot mutate as the implicit call to into_iter() in the loop
+        state[0].pop();     // Cannot mutate as the implicit call to into_iter() in the loop already borrowed
     }
 ```
 
