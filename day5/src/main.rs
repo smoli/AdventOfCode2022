@@ -106,20 +106,8 @@ fn part_two() {
     print!("\n");
 }
 
-fn test() {
-    let data = commons::read_input("input.txt");
-    let mut state = get_initial_state(&data);
-
-    for stack in &state[0..] {
-        stack.reverse();
-    }
-
-    state[0].pop();
-
-}
 
 fn main() {
     part_one();
     part_two();
-    test();
 }
