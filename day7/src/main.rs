@@ -70,5 +70,6 @@ fn main() {
         }
     }
 
+    // Part Two
     println!("{}", candidates.iter().min().unwrap());
 }
