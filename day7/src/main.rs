@@ -22,7 +22,6 @@ fn parse_console(input: Vec<String>) -> HashMap<String, i64> {
             }
         }
 
-
         match file_entry.captures(&l.as_str()) {
             None => {}
             Some(captures) => {
@@ -43,7 +42,6 @@ fn parse_console(input: Vec<String>) -> HashMap<String, i64> {
 
 
 fn main() {
-    // let data = commons::read_input("sampleInput.txt");
     let data = commons::read_input("input.txt");
 
     let sizes = parse_console(data);
@@ -55,5 +53,22 @@ fn main() {
         }
     }
 
-    println!("{sum}")
+    // Part One
+    println!("{sum}");
+
+    // Root has id 0
+    let used = sizes.get("0").unwrap();
+    let avail = 70000000;
+    let needed = 30000000;
+
+    let mut candidates: Vec<i64> = vec![];
+
+    for v in sizes.values() {
+
+        if (avail - used + v) >= needed {
+            candidates.push(*v);
+        }
+    }
+
+    println!("{}", candidates.iter().min().unwrap());
 }
