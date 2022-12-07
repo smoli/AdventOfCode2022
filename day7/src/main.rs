@@ -1,12 +1,12 @@
 use std::collections::HashMap;
 use regex::Regex;
 
-fn parse_console(input: Vec<String>) -> HashMap<String, i64> {
+fn parse_console(input: Vec<String>) -> HashMap<i32, i64> {
     let cd = Regex::new(r"^\$ cd (.+)").unwrap();
     let file_entry = Regex::new(r"(\d+)\s(.+)").unwrap();
 
-    let mut path: Vec<String> = vec![];
-    let mut sizes: HashMap<String, i64> = HashMap::new();
+    let mut path: Vec<i32> = vec![];
+    let mut sizes: HashMap<i32, i64> = HashMap::new();
     let mut folder_id: i32 = 0;
 
     for l in input {
@@ -16,7 +16,7 @@ fn parse_console(input: Vec<String>) -> HashMap<String, i64> {
                 if captures.get(1).unwrap().as_str() == ".." {
                     path.pop();
                 } else {
-                    path.push(String::from(folder_id.to_string()));
+                    path.push(folder_id);
                     folder_id += 1;
                 }
             }
@@ -29,8 +29,8 @@ fn parse_console(input: Vec<String>) -> HashMap<String, i64> {
 
                 for dir in &path {
                     match sizes.get(dir) {
-                        None => sizes.insert(String::from(dir), size),
-                        Some(v) => sizes.insert(String::from(dir), size + v),
+                        None => sizes.insert(*dir, size),
+                        Some(v) => sizes.insert(*dir, size + v),
                     };
                 }
             }
@@ -57,7 +57,7 @@ fn main() {
     println!("{sum}");
 
     // Root has id 0
-    let used = sizes.get("0").unwrap();
+    let used = sizes.get(&0i32).unwrap();
     let avail = 70000000;
     let needed = 30000000;
 
