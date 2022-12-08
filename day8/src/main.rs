@@ -10,7 +10,7 @@ use commons::{make_grid, read_input};
     }
 }*/
 
-fn find_visibles(map:&Vec<Vec<usize>>) -> HashMap<usize, bool> {
+fn find_visible(map:&Vec<Vec<usize>>) -> HashMap<usize, bool> {
     let mut res: HashMap<usize, bool> = HashMap::new();
     let mut x:usize;
     let mut y:usize;
@@ -128,7 +128,7 @@ fn main() {
     let data = read_input("input.txt");
     let map = make_grid(data, 0usize);
 
-    let res = find_visibles(&map);
+    let res = find_visible(&map);
 
     let w = map.get(0).unwrap().len();
     let h = map.len();
