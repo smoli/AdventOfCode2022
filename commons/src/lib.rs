@@ -23,8 +23,16 @@ pub fn read_input(file_path: &str) -> Vec<String> {
 /// Input is expected to be full.
 ///
 pub fn make_grid<T: Clone + FromStr>(input: Vec<String>, initial: T) -> Vec<Vec<T>> {
+    //
+    // input.into_iter()
+    //     .map(|line| line.split("\r\n").map(|c| c.parse::<T>().unwrap()).collect())
+    //     .collect()
+
+
     let w = input.get(0).unwrap().len();
     let h = input.len();
+
+
 
     let mut map:Vec<Vec<T>> = vec![vec![initial; w]; h];
 

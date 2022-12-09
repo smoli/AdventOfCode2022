@@ -28,8 +28,7 @@ fn scenic_score(map: &Vec<Vec<usize>>, sx: usize, sy: usize) -> u32 {
             score += 1;
             if map[y][x] >= tree_value {
                 break;
-            }
-            if x == 0 {
+            }            if x == 0 {
                 break;
             }
             x -= 1;
