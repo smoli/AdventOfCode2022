@@ -130,7 +130,7 @@ properly read the error messages. They almost always contain very helpful inform
 # Day 10
 
 I really like the traits concept. Mostly use it for `Display`/`Debug` to print out info when figuring
-out why my algorithm doesn't do what I think it's doing. 
+out why my algorithm doesn't do what I think it should be doing. 
 
 # License
 
