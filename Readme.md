@@ -121,6 +121,17 @@ So I tried to use a slice
 
 🤷‍♂️
 
+# Day 6-9
+
+I am still using mostly the basics of the language. The standard-library is quite big. 
+The docs for it are sometimes not that easy to grasp. Sometimes need myself to force more to
+properly read the error messages. They almost always contain very helpful information.
+
+# Day 10
+
+I really like the traits concept. Mostly use it for `Display`/`Debug` to print out info when figuring
+out why my algorithm doesn't do what I think it's doing. 
+
 # License
 
 See [here](LICENSE)
