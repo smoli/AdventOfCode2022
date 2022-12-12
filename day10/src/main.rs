@@ -116,9 +116,29 @@ fn parse(input: &Vec<String>) -> Vec<Operation> {
     result
 }
 
+fn render(log: &Vec<Protocolentry>) -> Vec<Vec<char>> {
+    let screen_width = 40;
+    let mut result:Vec<Vec<char>> = vec![(0..screen_width).map(|_| '.').collect(); 6];
+
+    for l in log {
+        let rx:i16 = *l.registers.get("x").unwrap() as i16;
+        let crx = (l.cycle - 1) % screen_width;
+
+        if  crx >= (rx - 1) as u16 && crx <= (rx + 1) as u16 {
+            let cy = l.cycle - 1;
+            let y = cy / screen_width;
+            let x = cy % screen_width;
+
+            result[y as usize][x as usize] = '#';
+        }
+    }
+
+    result
+}
+
 
 fn main() {
-    let data = commons::read_input("sampleInput.txt");
+    let data = commons::read_input("input.txt");
 
     let programm = parse(&data);
 
@@ -133,5 +153,11 @@ fn main() {
     }
 
     println!("Part One: {}", sum);
+
+    let image = render(&log);
+
+    for i in image {
+        println!("{}", i.into_iter().collect::<String>());
+    }
 
 }
