@@ -1,7 +1,7 @@
 extern crate core;
 
 use std::collections::HashMap;
-use std::fmt::{Display, Formatter, write};
+use std::fmt::{Display, Formatter};
 use regex::Regex;
 
 enum Operation {
@@ -50,9 +50,9 @@ fn perform_operation(op: &Operation, mut registers: Registers) -> Registers {
 }
 
 
-fn cpu_loop(input: &Vec<Operation>, failSafe: i32) -> Vec<Protocolentry> {
+fn cpu_loop(input: &Vec<Operation>, fail_safe: i32) -> Vec<Protocolentry> {
     let mut log: Vec<Protocolentry> = vec![];
-    let mut count = failSafe;
+    let mut count = fail_safe;
     let mut pc:i32 = -1;
     let mut cycles_remaining = 0;
     let mut registers: Registers = HashMap::new();
@@ -118,7 +118,7 @@ fn parse(input: &Vec<String>) -> Vec<Operation> {
 
 
 fn main() {
-    let data = commons::read_input("input.txt");
+    let data = commons::read_input("sampleInput.txt");
 
     let programm = parse(&data);
 
