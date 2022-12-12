@@ -132,6 +132,11 @@ properly read the error messages. They almost always contain very helpful inform
 I really like the traits concept. Mostly use it for `Display`/`Debug` to print out info when figuring
 out why my algorithm doesn't do what I think it should be doing. 
 
+# Day 11 
+
+This was hard, because for the longest time I tried to manipulate a Vector I'm iterating over. I
+really need to learn the collection types and their features.
+
 # License
 
 See [here](LICENSE)
