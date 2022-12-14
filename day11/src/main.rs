@@ -1,9 +1,10 @@
+use std::fmt::{Display, Formatter};
 use regex::Regex;
 use crate::Operation::{Multiply, Plus};
 
 enum Operation {
-    Multiply(i32),
-    Plus(i32),
+    Multiply(i64),
+    Plus(i64),
     Square,
 }
 
@@ -17,18 +18,28 @@ impl Clone for Operation {
     }
 }
 
+impl Display for Operation {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Multiply(v) => write!(f, "* {}", v),
+            Plus(v) => write!(f, "+ {}", v),
+            Operation::Square => write!(f, "* old"),
+        }
+    }
+}
+
 struct Monkey {
     num: usize,
-    items: Vec<i32>,
+    items: Vec<i64>,
     op: Operation,
-    test: i32,
-    when_true: i32,
-    when_false: i32,
-    inspections: u32,
+    test: i64,
+    when_true: i64,
+    when_false: i64,
+    inspections: usize,
 }
 
 impl Monkey {
-    pub fn add_item(&mut self, item: i32) {
+    pub fn add_item(&mut self, item: i64) {
         self.items.push(item);
     }
 
@@ -84,10 +95,10 @@ fn parse(input: &Vec<String>) -> Vec<Monkey> {
             "*" => match opc.get(2).unwrap().as_str() {
                 "old" => Operation::Square,
 
-                _ => Operation::Multiply(opc.get(2).unwrap().as_str().parse::<i32>().unwrap() as i32)
+                _ => Operation::Multiply(opc.get(2).unwrap().as_str().parse::<i64>().unwrap() as i64)
             },
 
-            "+" => Operation::Plus(opc.get(2).unwrap().as_str().parse::<i32>().unwrap() as i32),
+            "+" => Operation::Plus(opc.get(2).unwrap().as_str().parse::<i64>().unwrap() as i64),
 
             _ => panic!()
         };
@@ -121,7 +132,7 @@ fn parse(input: &Vec<String>) -> Vec<Monkey> {
 }
 
 
-fn perform_operation(op: &Operation, value: i32) -> i32 {
+fn perform_operation(op: &Operation, value: i64) -> i64 {
     return match op {
         Multiply(v) => value * v,
         Operation::Plus(v) => value + v,
@@ -129,13 +140,22 @@ fn perform_operation(op: &Operation, value: i32) -> i32 {
     };
 }
 
-fn sling_stuff(m: &Monkey) -> Vec<(usize, i32)> {
+fn sling_stuff(m: &Monkey) -> Vec<(usize, i64)> {
     m.items.iter().map(|item| {
-        let mut new_item = perform_operation(&m.op, *item);
-        new_item = (new_item as f32 / 3.0).floor() as i32;
+       let mut new_item = perform_operation(&m.op, *item);
+
+        // println!("Monkey {}", m.num);
+        // println!("\t{} -> {}", *item, new_item);
+
+        new_item = new_item / 3;
+        // print!("\t Bored to {} ", new_item);
+        // print!("\t Divisible by {} ", m.test);
+
         let target_monkey = if new_item % m.test == 0 {
+            // println!("true: Move to {}", m.when_true);
             m.when_true
         } else {
+            // println!("false: Move to {}", m.when_false);
             m.when_false
         };
 
@@ -145,7 +165,7 @@ fn sling_stuff(m: &Monkey) -> Vec<(usize, i32)> {
 
 fn stuff_slinging_simian_shenanigans(monkeys: Vec<Monkey>) -> Vec<Monkey> {
     let mut result: Vec<Monkey> = monkeys.iter().cloned().collect();
-    let mut collected_moves: Vec<(usize, i32)> = vec![];
+    let mut collected_moves: Vec<(usize, i64)> = vec![];
 
     for m in &mut result {
         for (t, i) in &collected_moves {
@@ -153,13 +173,14 @@ fn stuff_slinging_simian_shenanigans(monkeys: Vec<Monkey>) -> Vec<Monkey> {
                 m.add_item(*i);
             }
         }
+
+        m.inspections += m.items.len();
         collected_moves = collected_moves.into_iter()
             .filter(|(t, _)| m.num != *t).collect();
 
         let mut moves = sling_stuff(m);
         collected_moves.append(&mut moves);
 
-        m.inspections += m.items.len() as u32;
         m.clear();
     }
 
@@ -176,11 +197,11 @@ fn stuff_slinging_simian_shenanigans(monkeys: Vec<Monkey>) -> Vec<Monkey> {
 
 
 fn main() {
-    let data = commons::read_input("sampleInput.txt");
+    let data = commons::read_input("input.txt");
 
     let mut monkeys = parse(&data);
 
-    for _ in 0..20 {
+    for i in 0..20 {
         monkeys = stuff_slinging_simian_shenanigans(monkeys);
     }
 
@@ -188,15 +209,15 @@ fn main() {
         print!("Monkey {}", m.num);
         println!("\tInspections: {}", m.inspections);
 
-        println!("\tItems: {}", m.items.iter().map(|x| format!("{x}")).collect::<Vec<String>>().join(", "));
-        println!("\tOperation: new = old {}", match m.op {
-            Operation::Multiply(o) => format!("* {o}"),
-            Operation::Plus(o) => format!("+ {o}"),
-            Operation::Square => String::from("* old")
-        });
-
-        println!("\tTest: divisible by {}", m.test);
-        println!("\t\tIf true: throw to monkey {}", m.when_true);
-        println!("\t\tIf false: throw to monkey {}", m.when_false);
+        // println!("\tItems: {}", m.items.iter().map(|x| format!("{x}")).collect::<Vec<String>>().join(", "));
+        // println!("\tOperation: new = old {}", match m.op {
+        //     Operation::Multiply(o) => format!("* {o}"),
+        //     Operation::Plus(o) => format!("+ {o}"),
+        //     Operation::Square => String::from("* old")
+        // });
+        //
+        // println!("\tTest: divisible by {}", m.test);
+        // println!("\t\tIf true: throw to monkey {}", m.when_true);
+        // println!("\t\tIf false: throw to monkey {}", m.when_false);
     }
 }
